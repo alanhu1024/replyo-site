@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="Replyo adds the original context to replies in your X notifications. A Chrome extension, currently in testing.">
+  <title>Replyo — Every reply, in context.</title>
+  <link rel="icon" type="image/png" href="icons/128.png">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --paper: #f8faff;
+      --surface: #ffffff;
+      --ink: #13243c;
+      --muted: #52647d;
+      --blue: #215ee5;
+      --tint: #e9f0ff;
+      --line: #dce5f4;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-synthesis: none;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--paper); color: var(--ink); }
+    a { color: var(--blue); text-underline-offset: .2em; }
+    a:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; border-radius: 3px; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 104px; border-bottom: 1px solid var(--line); }
+    .brand { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: 700; letter-spacing: -.05em; }
+    .brand img { width: 44px; height: 44px; display: block; }
+    .header-link { font-size: 14px; text-decoration: none; }
+    .header-link:hover { text-decoration: underline; }
+    .hero { padding: 88px 0 66px; }
+    .status { display: inline-flex; align-items: center; gap: 9px; padding: 8px 13px; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; color: var(--muted); font-size: 13px; font-weight: 600; }
+    .status::before { content: ""; width: 7px; height: 7px; background: var(--blue); border-radius: 50%; }
+    h1 { margin: 27px 0 23px; font-size: clamp(3.2rem, 8.8vw, 6.3rem); line-height: 1.02; letter-spacing: -.065em; font-weight: 750; }
+    h1 span { color: var(--blue); }
+    .intro { max-width: 590px; margin: 0; font-size: clamp(1.12rem, 2.2vw, 1.35rem); line-height: 1.6; color: var(--muted); }
+    .availability { margin: 25px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
+    .availability strong { color: var(--ink); font-weight: 650; }
+    .features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; padding: 34px 0 40px; border-top: 1px solid var(--line); }
+    .feature-number { color: var(--blue); font-size: 12px; font-weight: 700; letter-spacing: .08em; }
+    h2 { margin: 16px 0 10px; font-size: 19px; line-height: 1.35; letter-spacing: -.025em; }
+    .features p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
+    .support { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px 24px; padding: 23px 26px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+    .support p { margin: 0; font-size: 14px; line-height: 1.65; color: var(--muted); }
+    .support strong { color: var(--ink); display: block; font-weight: 650; }
+    .support a { font-size: 14px; overflow-wrap: anywhere; }
+    footer { display: flex; align-items: baseline; justify-content: space-between; gap: 18px 24px; flex-wrap: wrap; padding: 30px 0 34px; font-size: 12px; line-height: 1.7; color: var(--muted); }
+    footer p { margin: 0; max-width: 650px; }
+    footer a { white-space: nowrap; }
+    @media (prefers-color-scheme: dark) {
+      :root { --paper: #0e1728; --surface: #131f33; --ink: #edf3ff; --muted: #a6b5cf; --blue: #85adff; --tint: #192b49; --line: #293b58; }
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 22px; }
+      header { min-height: 86px; }
+      .hero { padding: 55px 0 45px; }
+      .features { grid-template-columns: 1fr; gap: 29px; padding: 29px 0 34px; }
+      h2 { margin-top: 8px; }
+      .support { padding: 20px; }
+      footer { padding-bottom: 26px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand"><img src="icons/128.png" alt="" width="44" height="44"><span>Replyo</span></div>
+      <a class="header-link" href="mailto:alanhu1024@gmail.com">Contact support</a>
+    </header>
+    <main>
+      <section class="hero" aria-labelledby="headline">
+        <div class="status">Coming soon</div>
+        <h1 id="headline">Every reply,<br><span>in context.</span></h1>
+        <p class="intro">See the post a reply is answering, right inside your X notifications.</p>
+        <p class="availability"><strong>Chrome extension in testing.</strong><br>Not yet available in the Chrome Web Store.</p>
+      </section>
+      <section class="features" aria-label="How Replyo works">
+        <article>
+          <span class="feature-number" aria-hidden="true">01</span>
+          <h2>Know what they mean.</h2>
+          <p>A compact preview shows the direct parent post’s text and author beside supported replies.</p>
+        </article>
+        <article>
+          <span class="feature-number" aria-hidden="true">02</span>
+          <h2>Load on your terms.</h2>
+          <p>Cached context appears automatically. Click to load anything missing, or choose optional automatic loading through temporary X tabs.</p>
+        </article>
+        <article>
+          <span class="feature-number" aria-hidden="true">03</span>
+          <h2>Keep context local.</h2>
+          <p>Post content is processed in your browser with a short-lived cache. Loading contacts X directly; your content is not sent to the developer.</p>
+        </article>
+      </section>
+      <section class="support" aria-label="Support">
+        <p><strong>Questions about Replyo?</strong>Get in touch by email.</p>
+        <a href="mailto:alanhu1024@gmail.com">alanhu1024@gmail.com</a>
+      </section>
+    </main>
+    <footer>
+      <p>Replyo is an independent project, not affiliated with or endorsed by X Corp.</p>
+      <a href="privacy.html">Privacy policy</a>
+    </footer>
+  </div>
+</body>
+</html>
