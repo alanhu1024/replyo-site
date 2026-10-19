@@ -4,103 +4,200 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="Replyo adds the original context to replies in your X notifications. A Chrome extension, currently in testing.">
+  <meta name="description" content="See the original post and both authors’ follower counts in your X notifications. Install Replyo free from the Chrome Web Store. Local context, no Replyo analytics.">
+  <meta name="theme-color" content="#1768e8">
+  <meta property="og:title" content="Replyo — Every reply, in context.">
+  <meta property="og:description" content="The original post. Both authors’ follower counts. Right inside X notifications. Get the free Chrome extension.">
+  <meta property="og:type" content="website">
   <title>Replyo — Every reply, in context.</title>
   <link rel="icon" type="image/png" href="icons/128.png">
   <style>
     :root {
       color-scheme: light dark;
-      --paper: #f8faff;
+      --paper: #fafcff;
       --surface: #ffffff;
-      --ink: #13243c;
-      --muted: #52647d;
-      --blue: #215ee5;
-      --tint: #e9f0ff;
-      --line: #dce5f4;
+      --ink: #14243b;
+      --muted: #5b6b80;
+      --blue: #1768e8;
+      --tint: #eaf3ff;
+      --line: #dde6f1;
+      --shadow: 0 20px 70px #1a437014;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       font-synthesis: none;
     }
     * { box-sizing: border-box; }
-    body { margin: 0; background: var(--paper); color: var(--ink); }
+    body { margin: 0; background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; }
     a { color: var(--blue); text-underline-offset: .2em; }
-    a:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; border-radius: 3px; }
-    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 32px; }
-    header { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 104px; border-bottom: 1px solid var(--line); }
-    .brand { display: flex; align-items: center; gap: 10px; font-size: 24px; font-weight: 700; letter-spacing: -.05em; }
-    .brand img { width: 44px; height: 44px; display: block; }
-    .header-link { font-size: 14px; text-decoration: none; }
-    .header-link:hover { text-decoration: underline; }
-    .hero { padding: 88px 0 66px; }
-    .status { display: inline-flex; align-items: center; gap: 9px; padding: 8px 13px; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; color: var(--muted); font-size: 13px; font-weight: 600; }
-    .status::before { content: ""; width: 7px; height: 7px; background: var(--blue); border-radius: 50%; }
-    h1 { margin: 27px 0 23px; font-size: clamp(3.2rem, 8.8vw, 6.3rem); line-height: 1.02; letter-spacing: -.065em; font-weight: 750; }
+    a:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; border-radius: 4px; }
+    .skip-link { position: absolute; left: 18px; top: -70px; padding: 10px 15px; background: var(--surface); z-index: 2; }
+    .skip-link:focus { top: 18px; }
+    .wrap { max-width: 1080px; margin: 0 auto; padding: 0 36px; }
+    header { display: flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 100px; }
+    .brand { display: inline-flex; align-items: center; gap: 11px; color: var(--ink); font-size: 24px; font-weight: 750; letter-spacing: -.04em; text-decoration: none; }
+    .brand img { width: 40px; height: 40px; display: block; border-radius: 10px; }
+    .nav { display: flex; align-items: center; gap: 25px; }
+    .nav a { font-size: 13px; font-weight: 550; text-decoration: none; }
+    .nav .support-link { color: var(--muted); }
+    .nav a:hover { text-decoration: underline; }
+    .nav .nav-install { padding: 10px 15px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); color: var(--ink); }
+    .hero { padding: 64px 0 43px; text-align: center; }
+    .eyebrow { margin: 0; color: var(--blue); font-size: 11px; font-weight: 750; letter-spacing: .13em; text-transform: uppercase; }
+    h1 { margin: 20px 0 22px; font-size: clamp(3.5rem, 8vw, 6.4rem); line-height: 1.02; letter-spacing: -.065em; font-weight: 750; }
     h1 span { color: var(--blue); }
-    .intro { max-width: 590px; margin: 0; font-size: clamp(1.12rem, 2.2vw, 1.35rem); line-height: 1.6; color: var(--muted); }
-    .availability { margin: 25px 0 0; color: var(--muted); font-size: 14px; line-height: 1.6; }
-    .availability strong { color: var(--ink); font-weight: 650; }
-    .features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; padding: 34px 0 40px; border-top: 1px solid var(--line); }
-    .feature-number { color: var(--blue); font-size: 12px; font-weight: 700; letter-spacing: .08em; }
-    h2 { margin: 16px 0 10px; font-size: 19px; line-height: 1.35; letter-spacing: -.025em; }
-    .features p { margin: 0; color: var(--muted); font-size: 15px; line-height: 1.7; }
-    .support { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px 24px; padding: 23px 26px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
-    .support p { margin: 0; font-size: 14px; line-height: 1.65; color: var(--muted); }
-    .support strong { color: var(--ink); display: block; font-weight: 650; }
-    .support a { font-size: 14px; overflow-wrap: anywhere; }
-    footer { display: flex; align-items: baseline; justify-content: space-between; gap: 18px 24px; flex-wrap: wrap; padding: 30px 0 34px; font-size: 12px; line-height: 1.7; color: var(--muted); }
-    footer p { margin: 0; max-width: 650px; }
-    footer a { white-space: nowrap; }
+    .intro { max-width: 570px; margin: 0 auto; font-size: clamp(1.08rem, 2vw, 1.25rem); line-height: 1.65; color: var(--muted); }
+    .cta { display: inline-flex; align-items: center; justify-content: center; gap: 18px; padding: 16px 24px; border-radius: 11px; background: #1768e8; color: #fff; font-size: 15px; font-weight: 650; text-decoration: none; box-shadow: 0 5px 14px #1768e824; }
+    .cta:hover { background: #105bcc; }
+    .cta svg { width: 18px; height: 18px; flex: 0 0 auto; }
+    .hero .cta { margin-top: 28px; }
+    .availability { margin: 12px 0 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .showcase { max-width: 960px; margin: 0 auto 64px; }
+    .screenshot { margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); box-shadow: var(--shadow); }
+    .screenshot-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 15px 20px; border-bottom: 1px solid var(--line); }
+    .screenshot-top p { margin: 0; color: var(--muted); font-size: 12px; }
+    .screenshot-top strong { color: var(--ink); font-weight: 650; }
+    .screenshot-top a { white-space: nowrap; color: var(--muted); font-size: 11px; text-decoration: none; }
+    .screenshot-top a:hover { color: var(--blue); text-decoration: underline; }
+    .screenshot-image { display: block; background: #fff; }
+    .screenshot img { display: block; width: 100%; height: auto; }
+    .screenshot figcaption { padding: 16px 24px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; line-height: 1.7; text-align: center; }
+    .features { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 33px; padding: 0 0 55px; }
+    .feature-number { color: var(--blue); font-size: 11px; font-weight: 750; letter-spacing: .08em; }
+    h2, h3 { letter-spacing: -.03em; }
+    .features h2 { margin: 13px 0 10px; font-size: 19px; line-height: 1.35; }
+    .features p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
+    .getting-started { padding: 45px 0 47px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .getting-started h2 { margin: 0 0 27px; font-size: 27px; line-height: 1.3; }
+    .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin: 0; padding: 0; list-style: none; counter-reset: steps; }
+    .steps li { position: relative; padding-left: 38px; counter-increment: steps; }
+    .steps li::before { content: counter(steps); position: absolute; top: 0; left: 0; width: 25px; height: 25px; display: grid; place-items: center; border-radius: 50%; background: var(--tint); color: var(--blue); font-size: 12px; font-weight: 700; }
+    .steps h3 { margin: 2px 0 8px; font-size: 15px; line-height: 1.4; }
+    .steps p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.75; }
+    .privacy { display: grid; grid-template-columns: .85fr 1.15fr; gap: 50px; align-items: start; padding: 49px 0; }
+    .privacy h2 { max-width: 290px; margin: 0; font-size: 27px; line-height: 1.25; }
+    .privacy p { margin: 0 0 13px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+    .privacy a { font-size: 13px; font-weight: 550; }
+    .closing { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px; padding: 29px 32px; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); }
+    .closing h2 { margin: 0 0 6px; font-size: 21px; }
+    .closing p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .closing .cta { padding: 13px 19px; font-size: 14px; }
+    footer { display: flex; align-items: baseline; justify-content: space-between; gap: 18px 28px; padding: 31px 0 34px; font-size: 11px; line-height: 1.8; color: var(--muted); }
+    footer p { margin: 0; max-width: 460px; }
+    .footer-links { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px 20px; }
+    .footer-links a { color: var(--muted); }
+    .footer-links .email { overflow-wrap: anywhere; }
     @media (prefers-color-scheme: dark) {
-      :root { --paper: #0e1728; --surface: #131f33; --ink: #edf3ff; --muted: #a6b5cf; --blue: #85adff; --tint: #192b49; --line: #293b58; }
+      :root { --paper: #0d1522; --surface: #142031; --ink: #edf3ff; --muted: #a5b3c8; --blue: #8ab6ff; --tint: #1a304e; --line: #293b50; --shadow: 0 20px 70px #0003; }
     }
     @media (max-width: 640px) {
-      .wrap { padding: 0 22px; }
-      header { min-height: 86px; }
-      .hero { padding: 55px 0 45px; }
-      .features { grid-template-columns: 1fr; gap: 29px; padding: 29px 0 34px; }
-      h2 { margin-top: 8px; }
-      .support { padding: 20px; }
-      footer { padding-bottom: 26px; }
+      .wrap { padding: 0 21px; }
+      header { min-height: 85px; gap: 14px; }
+      .brand { gap: 8px; font-size: 22px; }
+      .brand img { width: 35px; height: 35px; border-radius: 8px; }
+      .nav .support-link { display: none; }
+      .nav .nav-install { padding: 9px 12px; font-size: 12px; }
+      .hero { padding: 39px 0 33px; }
+      h1 { font-size: clamp(3.2rem, 13vw, 5rem); margin: 19px 0; }
+      .intro { max-width: 360px; font-size: 16px; }
+      .hero .cta { margin-top: 24px; }
+      .showcase { margin-bottom: 41px; }
+      .screenshot { border-radius: 12px; }
+      .screenshot-top { padding: 12px 13px; gap: 8px; }
+      .screenshot-top p { font-size: 11px; }
+      .screenshot-top a { font-size: 10px; }
+      .screenshot figcaption { padding: 13px 16px; font-size: 11px; }
+      .features { grid-template-columns: 1fr; gap: 25px; padding-bottom: 35px; }
+      .features article { padding-left: 32px; position: relative; }
+      .feature-number { position: absolute; top: 4px; left: 0; }
+      .features h2 { margin-top: 0; font-size: 18px; }
+      .getting-started { padding: 32px 0 35px; }
+      .getting-started h2, .privacy h2 { font-size: 24px; }
+      .steps { grid-template-columns: 1fr; gap: 23px; }
+      .privacy { grid-template-columns: 1fr; gap: 17px; padding: 34px 0; }
+      .privacy h2 { max-width: none; }
+      .closing { padding: 24px; gap: 20px; }
+      .closing .cta { width: 100%; }
+      footer { flex-direction: column; gap: 14px; padding: 25px 0 30px; }
+      .footer-links { justify-content: flex-start; }
     }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
   <div class="wrap">
     <header>
-      <div class="brand"><img src="icons/128.png" alt="" width="44" height="44"><span>Replyo</span></div>
-      <a class="header-link" href="mailto:alanhu1024@gmail.com">Contact support</a>
+      <a class="brand" href="#main" aria-label="Replyo home"><img src="icons/128.png" alt="" width="40" height="40"><span>Replyo</span></a>
+      <nav class="nav" aria-label="Main navigation">
+        <a class="support-link" href="mailto:alanhu1024@gmail.com">Support</a>
+        <a class="nav-install" href="https://chromewebstore.google.com/detail/gpedoibklaibdbjchonpnblacnphocmi" target="_blank" rel="noopener noreferrer">Get Replyo free <span aria-hidden="true">↗</span></a>
+      </nav>
     </header>
-    <main>
+    <main id="main">
       <section class="hero" aria-labelledby="headline">
-        <div class="status">Coming soon</div>
+        <p class="eyebrow">Made for X notifications</p>
         <h1 id="headline">Every reply,<br><span>in context.</span></h1>
-        <p class="intro">See the post a reply is answering, right inside your X notifications.</p>
-        <p class="availability"><strong>Chrome extension in testing.</strong><br>Not yet available in the Chrome Web Store.</p>
+        <p class="intro">See the original post and both authors’ follower counts, right where you read replies.</p>
+        <a class="cta" href="https://chromewebstore.google.com/detail/gpedoibklaibdbjchonpnblacnphocmi" target="_blank" rel="noopener noreferrer">
+          Install for free
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+        </a>
+        <p class="availability">Available in the Chrome Web Store · For X on desktop</p>
+      </section>
+      <section class="showcase" aria-label="Replyo in action">
+        <figure class="screenshot">
+          <div class="screenshot-top">
+            <p><strong>Inside your notifications.</strong> With the context back in place.</p>
+            <a href="images/replyo-context.png" target="_blank" rel="noopener noreferrer">View full size <span aria-hidden="true">↗</span></a>
+          </div>
+          <a class="screenshot-image" href="images/replyo-context.png" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size Replyo screenshot">
+            <img src="images/replyo-context.png" alt="Replyo in X notifications: an original-post card beneath a reply, with follower-count badges next to the replier and original author." width="1280" height="800" decoding="async" fetchpriority="high">
+          </a>
+          <figcaption>The post they’re replying to, plus follower counts beside both names when available.</figcaption>
+        </figure>
       </section>
       <section class="features" aria-label="How Replyo works">
         <article>
           <span class="feature-number" aria-hidden="true">01</span>
-          <h2>Know what they mean.</h2>
-          <p>A compact preview shows the direct parent post’s text and author beside supported replies.</p>
+          <h2>Pick up the conversation.</h2>
+          <p>Read the post each reply is answering in a compact card inside Notifications. The original text and author stay close to the reply.</p>
         </article>
         <article>
           <span class="feature-number" aria-hidden="true">02</span>
-          <h2>Load on your terms.</h2>
-          <p>Cached context appears automatically. Click to load anything missing, or choose optional automatic loading through temporary X tabs.</p>
+          <h2>See who’s replying.</h2>
+          <p>Follower-count badges sit after the original author’s name and the replier’s name. Hover for the full number; unavailable counts stay hidden.</p>
         </article>
         <article>
           <span class="feature-number" aria-hidden="true">03</span>
-          <h2>Keep context local.</h2>
-          <p>Post content is processed in your browser with a short-lived cache. Loading contacts X directly; your content is not sent to the developer.</p>
+          <h2>Load on your terms.</h2>
+          <p>Already-cached originals appear right away. Load missing context with a click, or switch on optional automatic loading.</p>
         </article>
       </section>
-      <section class="support" aria-label="Support">
-        <p><strong>Questions about Replyo?</strong>Get in touch by email.</p>
-        <a href="mailto:alanhu1024@gmail.com">alanhu1024@gmail.com</a>
+      <section class="getting-started" aria-labelledby="start-title">
+        <h2 id="start-title">Your next reply starts here.</h2>
+        <ol class="steps">
+          <li><h3>Install Replyo.</h3><p>Add the free extension from the Chrome Web Store.</p></li>
+          <li><h3>Switch it on.</h3><p>Open Replyo from your browser’s extensions menu and enable it. Automatic loading is your choice.</p></li>
+          <li><h3>Open X notifications.</h3><p>Find a reply, see its original context, and keep the conversation going.</p></li>
+        </ol>
+      </section>
+      <section class="privacy" aria-labelledby="privacy-title">
+        <h2 id="privacy-title">Your context stays<br>in your browser.</h2>
+        <div>
+          <p>Replyo uses a short-lived local cache. There’s no developer-operated server and no Replyo usage analytics.</p>
+          <p>To retrieve a missing original, Replyo briefly opens an X tab and loads the post directly from X. It doesn’t send your posts to the developer.</p>
+          <a href="privacy.html">Read the privacy policy <span aria-hidden="true">↗</span></a>
+        </div>
+      </section>
+      <section class="closing" aria-label="Install Replyo">
+        <div><h2>A little context. A better conversation.</h2><p>Bring the original post back into view.</p></div>
+        <a class="cta" href="https://chromewebstore.google.com/detail/gpedoibklaibdbjchonpnblacnphocmi" target="_blank" rel="noopener noreferrer">Get Replyo free <span aria-hidden="true">↗</span></a>
       </section>
     </main>
     <footer>
       <p>Replyo is an independent project, not affiliated with or endorsed by X Corp.</p>
-      <a href="privacy.html">Privacy policy</a>
+      <div class="footer-links">
+        <a class="email" href="mailto:alanhu1024@gmail.com">alanhu1024@gmail.com</a>
+        <a href="privacy.html">Privacy policy</a>
+      </div>
     </footer>
   </div>
 </body>
