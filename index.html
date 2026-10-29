@@ -1,15 +1,16 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="See the original post and both authors’ follower counts in your X notifications. Install Replyo free from the Chrome Web Store. Local context, no Replyo analytics.">
+  <meta name="description" content="Replyo，让 X 上的交流更顺畅。查看回复原文与粉丝数，了解即将到来的 AI 回复助手：参与别人的讨论，也回应自己收到的评论。" data-en-content="Replyo helps you keep conversations going on X. See reply context and follower counts, and preview the upcoming AI assistant for replying to posts and responding to comments.">
   <meta name="theme-color" content="#1768e8">
-  <meta property="og:title" content="Replyo — Every reply, in context.">
-  <meta property="og:description" content="The original post. Both authors’ follower counts. Right inside X notifications. Get the free Chrome extension.">
+  <meta property="og:title" content="Replyo · 参与讨论，接住回应。" data-en-content="Replyo — Join conversations. Keep them going.">
+  <meta property="og:description" content="回复感兴趣的帖子，也接住自己帖子下的评论。查看原文，整理想法，让每次交流更顺畅。" data-en-content="Reply to posts that interest you and respond to comments on your own. Find the context, gather your thoughts, and keep the conversation going.">
   <meta property="og:type" content="website">
-  <title>Replyo — Every reply, in context.</title>
+  <title data-en="Replyo — Join conversations. Keep them going.">Replyo · 参与讨论，接住回应。</title>
+  <link rel="canonical" href="https://alanhu1024.github.io/replyo-site/">
   <link rel="icon" type="image/png" href="icons/128.png">
   <style>
     :root {
@@ -28,7 +29,7 @@
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--paper); color: var(--ink); -webkit-font-smoothing: antialiased; }
     a { color: var(--blue); text-underline-offset: .2em; }
-    a:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; border-radius: 4px; }
+    a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; border-radius: 4px; }
     .skip-link { position: absolute; left: 18px; top: -70px; padding: 10px 15px; background: var(--surface); z-index: 2; }
     .skip-link:focus { top: 18px; }
     .wrap { max-width: 1080px; margin: 0 auto; padding: 0 36px; }
@@ -40,9 +41,10 @@
     .nav .support-link { color: var(--muted); }
     .nav a:hover { text-decoration: underline; }
     .nav .nav-install { padding: 10px 15px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); color: var(--ink); }
+    .language-switch { font: inherit; font-size: 13px; min-height: 44px; padding: 8px 12px; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); color: var(--ink); cursor: pointer; }
     .hero { padding: 64px 0 43px; text-align: center; }
     .eyebrow { margin: 0; color: var(--blue); font-size: 11px; font-weight: 750; letter-spacing: .13em; text-transform: uppercase; }
-    h1 { margin: 20px 0 22px; font-size: clamp(3.5rem, 8vw, 6.4rem); line-height: 1.02; letter-spacing: -.065em; font-weight: 750; }
+    h1 { margin: 20px 0 22px; font-size: clamp(3.5rem, 8vw, 6.4rem); line-height: 1.12; letter-spacing: -.045em; font-weight: 750; }
     h1 span { color: var(--blue); }
     .intro { max-width: 570px; margin: 0 auto; font-size: clamp(1.08rem, 2vw, 1.25rem); line-height: 1.65; color: var(--muted); }
     .cta { display: inline-flex; align-items: center; justify-content: center; gap: 18px; padding: 16px 24px; border-radius: 11px; background: #1768e8; color: #fff; font-size: 15px; font-weight: 650; text-decoration: none; box-shadow: 0 5px 14px #1768e824; }
@@ -50,6 +52,12 @@
     .cta svg { width: 18px; height: 18px; flex: 0 0 auto; }
     .hero .cta { margin-top: 28px; }
     .availability { margin: 12px 0 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .release-note { max-width: 710px; margin: 24px auto 0; padding: 14px 20px; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); text-align: left; }
+    .release-note p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.8; }
+    .release-note strong { color: var(--ink); }
+    .release-note details { margin-top: 7px; font-size: 12px; line-height: 1.8; color: var(--muted); }
+    .release-note summary { width: fit-content; cursor: pointer; color: var(--blue); }
+    .release-note details p { margin-top: 7px; }
     .showcase { max-width: 960px; margin: 0 auto 64px; }
     .screenshot { margin: 0; overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); box-shadow: var(--shadow); }
     .screenshot-top { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 15px 20px; border-bottom: 1px solid var(--line); }
@@ -65,6 +73,14 @@
     h2, h3 { letter-spacing: -.03em; }
     .features h2 { margin: 13px 0 10px; font-size: 19px; line-height: 1.35; }
     .features p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
+    .feature-state { display: inline-block; margin-bottom: 10px; padding: 3px 8px; border-radius: 5px; background: var(--tint); color: var(--blue); font-size: 11px; font-weight: 600; }
+    .preview { margin-bottom: 50px; padding: 32px; border: 1px solid var(--line); border-radius: 18px; background: var(--surface); }
+    .preview h2 { margin: 9px 0 14px; font-size: 28px; line-height: 1.4; }
+    .preview p { max-width: 800px; color: var(--muted); font-size: 14px; line-height: 1.8; }
+    .reply-types { display: flex; flex-wrap: wrap; gap: 9px; padding: 0; margin: 20px 0; list-style: none; }
+    .reply-types li { padding: 8px 13px; border-radius: 8px; background: var(--tint); color: var(--blue); font-size: 13px; }
+    .preview .workflow { color: var(--ink); font-weight: 600; }
+    .preview .ai-cost { padding-top: 17px; margin-bottom: 0; border-top: 1px solid var(--line); font-size: 13px; }
     .getting-started { padding: 45px 0 47px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
     .getting-started h2 { margin: 0 0 27px; font-size: 27px; line-height: 1.3; }
     .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; margin: 0; padding: 0; list-style: none; counter-reset: steps; }
@@ -94,9 +110,10 @@
       .brand { gap: 8px; font-size: 22px; }
       .brand img { width: 35px; height: 35px; border-radius: 8px; }
       .nav .support-link { display: none; }
-      .nav .nav-install { padding: 9px 12px; font-size: 12px; }
+      .nav .nav-install { display: none; }
+      .nav { gap: 10px; }
       .hero { padding: 39px 0 33px; }
-      h1 { font-size: clamp(3.2rem, 13vw, 5rem); margin: 19px 0; }
+      h1 { font-size: clamp(2.4rem, 13vw, 5rem); margin: 19px 0; }
       .intro { max-width: 360px; font-size: 16px; }
       .hero .cta { margin-top: 24px; }
       .showcase { margin-bottom: 41px; }
@@ -109,6 +126,9 @@
       .features article { padding-left: 32px; position: relative; }
       .feature-number { position: absolute; top: 4px; left: 0; }
       .features h2 { margin-top: 0; font-size: 18px; }
+      .release-note { padding: 13px 16px; }
+      .preview { padding: 23px; margin-bottom: 33px; }
+      .preview h2 { font-size: 24px; }
       .getting-started { padding: 32px 0 35px; }
       .getting-started h2, .privacy h2 { font-size: 24px; }
       .steps { grid-template-columns: 1fr; gap: 23px; }
@@ -122,83 +142,138 @@
   </style>
 </head>
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
+  <a class="skip-link" href="#main" data-en="Skip to content">跳到正文</a>
   <div class="wrap">
     <header>
-      <a class="brand" href="#main" aria-label="Replyo home"><img src="icons/128.png" alt="" width="40" height="40"><span>Replyo</span></a>
-      <nav class="nav" aria-label="Main navigation">
-        <a class="support-link" href="mailto:alanhu1024@gmail.com">Support</a>
-        <a class="nav-install" href="https://chromewebstore.google.com/detail/gpedoibklaibdbjchonpnblacnphocmi" target="_blank" rel="noopener noreferrer">Get Replyo free <span aria-hidden="true">↗</span></a>
+      <a class="brand" href="#main" aria-label="Replyo"><img src="icons/128.png" alt="" width="40" height="40"><span>Replyo</span></a>
+      <nav class="nav" aria-label="导航" data-en-aria="Navigation">
+        <a class="support-link" href="mailto:alanhu1024@gmail.com" data-en="Support">联系支持</a>
+        <button class="language-switch" id="language-switch" type="button" lang="en" aria-label="Switch to English" hidden>English</button>
+        <a class="nav-install" href="https://chromewebstore.google.com/detail/gpedoibklaibdbjchonpnblacnphocmi" target="_blank" rel="noopener noreferrer"><span data-en="Install the store version">安装商店版</span> <span aria-hidden="true">↗</span></a>
       </nav>
     </header>
     <main id="main">
       <section class="hero" aria-labelledby="headline">
-        <p class="eyebrow">Made for X notifications</p>
-        <h1 id="headline">Every reply,<br><span>in context.</span></h1>
-        <p class="intro">See the original post and both authors’ follower counts, right where you read replies.</p>
+        <p class="eyebrow" data-en="A little help for your conversations on X">让 X 上的交流更顺畅</p>
+        <h1 id="headline"><span style="color: inherit" data-en="Join conversations.">参与讨论，</span><br><span data-en="Keep them going.">接住回应。</span></h1>
+        <p class="intro" data-en="Reply to posts that interest you. Respond to comments on your own. Find the context, gather your thoughts, and spend more time on the conversation.">回复感兴趣的帖子，也接住自己帖子下的评论。少来回找上下文，多花心思交流。</p>
         <a class="cta" href="https://chromewebstore.google.com/detail/gpedoibklaibdbjchonpnblacnphocmi" target="_blank" rel="noopener noreferrer">
-          Install for free
+          <span data-en="Install the store version">安装商店版</span>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
         </a>
-        <p class="availability">Available in the Chrome Web Store · For X on desktop</p>
+        <p class="availability" data-en="Free extension · Chrome Web Store · For X on desktop">免费安装 · Chrome Web Store · 适用于桌面网页版 X</p>
+        <div class="release-note">
+          <p><strong data-en="What you can install today: ">现在能用：</strong><span data-en="reply context and follower badges. The reply assistant and workspace have been submitted for review. The varied-ideas design below is still in local testing.">原文预览与粉丝徽章。回复助手和互动工作台已提交审核；下方的多样候选新设计仍在本地测试。</span></p>
+          <details>
+            <summary data-en="Version details · Updated October 29, 2026">版本进度 · 更新于 2026 年 10 月 29 日</summary>
+            <p data-en="Public version: 0.1.4. Submitted for review: 0.3.5, with the reply assistant, DeepSeek connection and local workspace. Local testing: 0.3.6, with varied reply ideas and no reply-type selection. These new features are not yet included in the public store version.">商店公开版：0.1.4。已提交审核：0.3.5，包含回复助手、DeepSeek 接入和本地工作台。本地测试：0.3.6，自动提供多样候选，无需预选回复类型。上述新功能尚未包含在商店公开版中。</p>
+          </details>
+        </div>
       </section>
-      <section class="showcase" aria-label="Replyo in action">
-        <figure class="screenshot">
-          <div class="screenshot-top">
-            <p><strong>Inside your notifications.</strong> With the context back in place.</p>
-            <a href="images/replyo-context.png" target="_blank" rel="noopener noreferrer">View full size <span aria-hidden="true">↗</span></a>
-          </div>
-          <a class="screenshot-image" href="images/replyo-context.png" target="_blank" rel="noopener noreferrer" aria-label="Open the full-size Replyo screenshot">
-            <img src="images/replyo-context.png" alt="Replyo in X notifications: an original-post card beneath a reply, with follower-count badges next to the replier and original author." width="1280" height="800" decoding="async" fetchpriority="high">
-          </a>
-          <figcaption>The post they’re replying to, plus follower counts beside both names when available.</figcaption>
-        </figure>
-      </section>
-      <section class="features" aria-label="How Replyo works">
+      <section class="features" aria-label="两种互动，一个工作台" data-en-aria="Two ways to connect, one workspace">
         <article>
           <span class="feature-number" aria-hidden="true">01</span>
-          <h2>Pick up the conversation.</h2>
-          <p>Read the post each reply is answering in a compact card inside Notifications. The original text and author stay close to the reply.</p>
+          <h2 data-en="Join a discussion that interests you.">看到想聊的帖子，接上话。</h2>
+          <span class="feature-state" data-en="Reply assistant · Submitted for review">回复助手 · 已提交审核</span>
+          <p data-en="Get reply ideas in X’s reply dialog or on a post’s detail page. Add your own thoughts, choose and edit a draft, then insert it into X’s reply box.">在回复弹框或帖子详情页里获得回复建议。写下自己的想法，挑选、修改候选，再填入 X 回复区。</p>
         </article>
         <article>
           <span class="feature-number" aria-hidden="true">02</span>
-          <h2>See who’s replying.</h2>
-          <p>Follower-count badges sit after the original author’s name and the replier’s name. Hover for the full number; unavailable counts stay hidden.</p>
+          <h2 data-en="Know what each comment is answering.">收到评论，看清在接哪句话。</h2>
+          <span class="feature-state" data-en="Original-post preview · Available now">原文预览 · 已上线</span>
+          <p data-en="When notifications pile up, see the directly replied-to post alongside supported replies. Spend less time opening threads to work out what someone means.">通知一多，不必逐条点进对话、往上翻。支持的回复旁直接显示它回应的原文，先看懂，再接着聊。</p>
         </article>
         <article>
           <span class="feature-number" aria-hidden="true">03</span>
-          <h2>Load on your terms.</h2>
-          <p>Already-cached originals appear right away. Load missing context with a click, or switch on optional automatic loading.</p>
+          <h2 data-en="Come back to conversations worth continuing.">想继续的对话，留着慢慢聊。</h2>
+          <span class="feature-state" data-en="Local workspace · Submitted for review">本地工作台 · 已提交审核</span>
+          <p data-en="Keep selected conversations and unfinished drafts in one place on your device. Return to the context and pick up where you left off.">把想回应的帖子和没写完的草稿保存在本机。下次打开工作台，带着上下文继续，不必重新找一遍。</p>
         </article>
       </section>
+      <section class="preview" aria-labelledby="ideas-title">
+        <p class="eyebrow" data-en="Coming next · Varied reply ideas in local testing">下一版预览 · 多样候选正在本地测试</p>
+        <h2 id="ideas-title" data-en="A few ways to reply. Choose the one that sounds like you.">给你几种说法，选一句像自己的。</h2>
+        <p data-en="No need to choose a reply type first. Replyo uses the post and your thoughts to suggest up to four replies with different angles and lengths. It picks what fits the conversation, rather than forcing every style into every post.">不用先选回复类型。Replyo 结合帖子和你的想法，给出最多四条不同角度、不同长短的候选。根据话题挑合适的说法，不为凑类型而硬聊。</p>
+        <ul class="reply-types" aria-label="可能的回复角度" data-en-aria="Possible reply approaches">
+          <li data-en="Keep it brief">简短回应</li>
+          <li data-en="Add something useful">补充信息</li>
+          <li data-en="Ask a thoughtful question">好奇一问</li>
+          <li data-en="Share another view">另一种看法</li>
+          <li data-en="Keep it light">轻松调侃</li>
+        </ul>
+        <p data-en="A lighthearted post can invite a little humor. A serious topic deserves care. Different opinions can still be expressed warmly, without turning a conversation into an argument.">轻松的帖子，可以接个梗；认真的话题，就好好聊。有不同意见，也友好地表达，让回复更像自然交流。</p>
+        <p class="workflow" data-en="Generate ideas → Choose and edit → Insert into X’s reply box → Publish yourself on X">生成候选 → 挑选修改 → 填入 X 回复区 → 由你在 X 发布</p>
+        <p class="ai-cost" data-en="Optional AI uses your own DeepSeek API key. API usage is billed to your DeepSeek account. Replyo does not automatically publish replies, like posts or follow accounts.">AI 为可选功能，使用你自己的 DeepSeek API Key，用量费用由你的 DeepSeek 账户承担。Replyo 不会自动发布回复、点赞或关注。</p>
+      </section>
+      <section class="showcase" aria-label="已上线功能实拍" data-en-aria="Screenshot of currently available features">
+        <figure class="screenshot">
+          <div class="screenshot-top">
+            <p><strong data-en="Reply context, right in notifications.">通知里的原文预览。</strong> <span data-en="Available in the store version.">商店版已可用。</span></p>
+            <a href="images/replyo-context.png" target="_blank" rel="noopener noreferrer"><span data-en="View full size">查看大图</span> <span aria-hidden="true">↗</span></a>
+          </div>
+          <a class="screenshot-image" href="images/replyo-context.png" target="_blank" rel="noopener noreferrer" aria-label="查看 Replyo 完整截图" data-en-aria="Open the full-size Replyo screenshot">
+            <img src="images/replyo-context.png" alt="X 通知中的 Replyo 原文卡片，回复者与原文作者昵称旁显示可获取的粉丝数。" data-en-alt="Replyo in X notifications: an original-post card with available follower counts beside the replier and original author’s names." width="1280" height="800" decoding="async" loading="lazy">
+          </a>
+          <figcaption data-en="See the original post beside a reply. Available follower counts also appear beside names in notifications, your Home timeline and post details.">回复旁看原文，昵称后看粉丝数。粉丝徽章也支持首页信息流和帖子详情页，仅在数据可获取时显示。</figcaption>
+        </figure>
+      </section>
       <section class="getting-started" aria-labelledby="start-title">
-        <h2 id="start-title">Your next reply starts here.</h2>
+        <h2 id="start-title" data-en="Start with the features available today.">先从看清每条回复开始。</h2>
         <ol class="steps">
-          <li><h3>Install Replyo.</h3><p>Add the free extension from the Chrome Web Store.</p></li>
-          <li><h3>Switch it on.</h3><p>Open Replyo from your browser’s extensions menu and enable it. Automatic loading is your choice.</p></li>
-          <li><h3>Open X notifications.</h3><p>Find a reply, see its original context, and keep the conversation going.</p></li>
+          <li><h3 data-en="Install the store version.">安装商店版</h3><p data-en="Add Replyo from the Chrome Web Store. The extension is free to install.">在 Chrome Web Store 添加 Replyo，插件可免费安装。</p></li>
+          <li><h3 data-en="Enable Replyo.">开启 Replyo</h3><p data-en="Open Replyo from the extensions menu and turn it on. Choose whether to load context automatically.">从浏览器扩展菜单打开并启用 Replyo，按需开启原文自动加载。</p></li>
+          <li><h3 data-en="Go to X notifications.">打开 X 通知</h3><p data-en="Read a reply with its original post in view, then open the conversation to respond.">看清回复对应的原文，再进入对话接着聊。</p></li>
         </ol>
       </section>
       <section class="privacy" aria-labelledby="privacy-title">
-        <h2 id="privacy-title">Your context stays<br>in your browser.</h2>
+        <h2 id="privacy-title" data-en="Keep drafts local. Use AI when you choose.">本地整理，按需调用 AI。</h2>
         <div>
-          <p>Replyo uses a short-lived local cache. There’s no developer-operated server and no Replyo usage analytics.</p>
-          <p>To retrieve a missing original, Replyo briefly opens an X tab and loads the post directly from X. It doesn’t send your posts to the developer.</p>
-          <a href="privacy.html">Read the privacy policy <span aria-hidden="true">↗</span></a>
+          <p data-en="Replyo caches context locally. The upcoming workspace also keeps saved conversations and drafts on your device. There is no Replyo-operated server or Replyo usage analytics.">原文缓存保存在本机，新版工作台的对话与草稿也保存在本机。Replyo 没有开发者运营的后台服务器，也不采集使用分析数据。</p>
+          <p data-en="In the AI-enabled version, choosing Generate ideas sends the selected post, its available direct parent and your entered thoughts directly to DeepSeek. Your API key is used only with DeepSeek, never sent to X or a Replyo server.">在支持 AI 的新版中，只有你主动点击“生成候选”，才会将所选帖子、可用的直接上文和你输入的想法发送给 DeepSeek。API Key 仅用于 DeepSeek 请求，不发送给 X 或 Replyo 服务器。</p>
+          <p data-en="When context is missing, Replyo may briefly open a background X tab to retrieve it directly from X.">原文缺失时，Replyo 可能短暂打开后台 X 标签页，直接从 X 获取上下文。</p>
+          <a href="privacy.html"><span data-en="Read the privacy policy">阅读隐私政策</span> <span aria-hidden="true">↗</span></a>
         </div>
       </section>
-      <section class="closing" aria-label="Install Replyo">
-        <div><h2>A little context. A better conversation.</h2><p>Bring the original post back into view.</p></div>
-        <a class="cta" href="https://chromewebstore.google.com/detail/gpedoibklaibdbjchonpnblacnphocmi" target="_blank" rel="noopener noreferrer">Get Replyo free <span aria-hidden="true">↗</span></a>
+      <section class="closing" aria-label="安装 Replyo" data-en-aria="Install Replyo">
+        <div><h2 data-en="Let people get to know you through your replies.">让别人通过你的观点，慢慢认识你。</h2><p data-en="Make a little more room for conversations you want to have.">把省下的时间，留给你想认真参与的交流。</p></div>
+        <a class="cta" href="https://chromewebstore.google.com/detail/gpedoibklaibdbjchonpnblacnphocmi" target="_blank" rel="noopener noreferrer"><span data-en="Install the store version">安装商店版</span> <span aria-hidden="true">↗</span></a>
       </section>
     </main>
     <footer>
-      <p>Replyo is an independent project, not affiliated with or endorsed by X Corp.</p>
+      <p data-en="Replyo is an independent project, not affiliated with or endorsed by X Corp.">Replyo 是独立项目，与 X Corp. 无隶属关系，亦未获得其背书。</p>
       <div class="footer-links">
         <a class="email" href="mailto:alanhu1024@gmail.com">alanhu1024@gmail.com</a>
-        <a href="privacy.html">Privacy policy</a>
+        <a href="privacy.html" data-en="Privacy policy">隐私政策</a>
       </div>
     </footer>
   </div>
+  <script>
+    (() => {
+      const button = document.getElementById('language-switch');
+      const texts = [...document.querySelectorAll('[data-en]')].map(node => ({ node, zh: node.textContent, en: node.dataset.en }));
+      const attributes = [['data-en-content', 'content'], ['data-en-aria', 'aria-label'], ['data-en-alt', 'alt']].flatMap(([source, target]) =>
+        [...document.querySelectorAll('[' + source + ']')].map(node => ({ node, target, zh: node.getAttribute(target), en: node.getAttribute(source) }))
+      );
+      const preferenceKey = 'replyo-site-language';
+      let language = 'zh-CN';
+      try { if (localStorage.getItem(preferenceKey) === 'en') language = 'en'; } catch {}
+      function render() {
+        const english = language === 'en';
+        document.documentElement.lang = language;
+        for (const item of texts) item.node.textContent = english ? item.en : item.zh;
+        for (const item of attributes) item.node.setAttribute(item.target, english ? item.en : item.zh);
+        button.textContent = english ? '中文' : 'English';
+        button.lang = english ? 'zh-CN' : 'en';
+        button.setAttribute('aria-label', english ? '切换为中文' : 'Switch to English');
+      }
+      button.hidden = false;
+      button.addEventListener('click', () => {
+        language = language === 'en' ? 'zh-CN' : 'en';
+        render();
+        try { localStorage.setItem(preferenceKey, language); } catch {}
+      });
+      render();
+    })();
+  </script>
 </body>
 </html>
