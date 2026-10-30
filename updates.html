@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="查看 Replyo 的更新记录，了解已上线、已提交审核和本地测试中的功能。" data-en-content="Explore Replyo updates and see which features are released, submitted for review or in local testing.">
+  <meta name="theme-color" content="#1768e8">
+  <title data-en="Updates · Replyo">更新记录 · Replyo</title>
+  <link rel="canonical" href="https://alanhu1024.github.io/replyo-site/updates.html">
+  <link rel="icon" type="image/png" href="icons/128.png">
+  <style>
+    :root { color-scheme:light dark; --paper:#fafcff; --surface:#fff; --ink:#14243b; --muted:#5b6b80; --blue:#1768e8; --tint:#eaf3ff; --line:#dde6f1; font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; font-synthesis:none; }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--paper); color:var(--ink); -webkit-font-smoothing:antialiased; }
+    a { color:var(--blue); text-underline-offset:.2em; }
+    a:focus-visible, button:focus-visible { outline:3px solid var(--blue); outline-offset:5px; border-radius:4px; }
+    .skip-link { position:absolute; top:-70px; left:18px; padding:10px 15px; background:var(--surface); z-index:2; }
+    .skip-link:focus { top:18px; }
+    .wrap { max-width:1080px; margin:auto; padding:0 36px; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:24px; min-height:100px; }
+    .brand { display:inline-flex; align-items:center; gap:11px; color:var(--ink); font-size:24px; font-weight:750; letter-spacing:-.04em; text-decoration:none; }
+    .brand img { display:block; width:40px; height:40px; border-radius:10px; }
+    .nav { display:flex; align-items:center; gap:20px; }
+    .nav a { font-size:13px; font-weight:550; text-decoration:none; }
+    .nav a:hover { text-decoration:underline; }
+    .nav a[aria-current] { color:var(--ink); }
+    .nav-install, .language-switch { padding:10px 15px; border:1px solid var(--line); border-radius:9px; background:var(--surface); color:var(--ink); }
+    .language-switch { font:inherit; font-size:13px; min-height:44px; cursor:pointer; }
+    .page-intro { padding:50px 0 32px; max-width:690px; }
+    .eyebrow { margin:0; color:var(--blue); font-size:12px; font-weight:700; letter-spacing:.1em; }
+    h1 { margin:15px 0; font-size:clamp(2.3rem,5vw,3.5rem); line-height:1.2; letter-spacing:-.045em; }
+    .page-intro p:last-child { margin:0; color:var(--muted); font-size:17px; line-height:1.75; }
+    .availability { padding:18px 22px; border:1px solid var(--line); border-radius:12px; background:var(--surface); margin-bottom:32px; font-size:13px; line-height:1.8; }
+    .availability p { margin:0; }
+    .availability p + p { margin-top:5px; color:var(--muted); }
+    .releases { max-width:850px; }
+    .release { display:grid; grid-template-columns:150px 1fr; gap:28px; padding:30px 0; border-bottom:1px solid var(--line); }
+    .release:first-child { padding-top:8px; }
+    .release-meta { padding-top:4px; }
+    .version { display:block; font-size:24px; font-weight:750; letter-spacing:-.03em; }
+    .status { display:inline-block; margin-top:10px; padding:4px 9px; border-radius:6px; background:var(--tint); color:var(--blue); font-size:12px; font-weight:600; }
+    .released { color:#16794d; background:#e8f5ec; }
+    .release h2 { margin:0 0 13px; font-size:23px; letter-spacing:-.025em; line-height:1.4; }
+    .release p { margin:0 0 10px; font-size:15px; line-height:1.8; color:var(--muted); }
+    .release ul { margin:0 0 14px; padding-left:20px; color:var(--muted); font-size:14px; line-height:1.85; }
+    .release li + li { margin-top:5px; }
+    .release-link { display:inline-flex; align-items:center; min-height:44px; font-size:14px; font-weight:600; text-decoration:none; }
+    .release-link:hover { text-decoration:underline; }
+    .release .note { font-size:12px; }
+    .closing { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:26px; border:1px solid var(--line); border-radius:14px; background:var(--surface); margin:40px 0 20px; }
+    .closing h2 { margin:0 0 7px; font-size:20px; }
+    .closing p { margin:0; color:var(--muted); font-size:14px; line-height:1.7; }
+    .cta { display:inline-flex; justify-content:center; align-items:center; flex-shrink:0; padding:13px 18px; border-radius:9px; background:#1768e8; color:#fff; font-size:14px; font-weight:600; text-decoration:none; min-height:44px; }
+    .cta:hover { background:#105bcc; }
+    footer { display:flex; justify-content:space-between; align-items:baseline; gap:18px 28px; padding:25px 0 34px; color:var(--muted); font-size:12px; line-height:1.8; }
+    footer p { margin:0; max-width:460px; }
+    .footer-links { display:flex; flex-wrap:wrap; justify-content:flex-end; gap:10px 18px; }
+    .footer-links a { color:var(--muted); }
+    @media(prefers-color-scheme:dark) { :root { --paper:#0d1522; --surface:#142031; --ink:#edf3ff; --muted:#a5b3c8; --blue:#8ab6ff; --tint:#1a304e; --line:#293b50; } .released { color:#8cdfaf; background:#17382c; } }
+    @media(max-width:640px) { .wrap { padding:0 21px; } header { min-height:85px; gap:12px; flex-wrap:wrap; padding:20px 0 10px; } .brand { font-size:22px; gap:8px; } .brand img { width:35px; height:35px; border-radius:8px; } .nav { width:100%; justify-content:space-between; gap:10px; } .nav-install { display:none; } .page-intro { padding:32px 0 25px; } .page-intro p:last-child { font-size:16px; } .availability { padding:16px; } .release { grid-template-columns:1fr; gap:15px; padding:25px 0; } .release-meta { display:flex; align-items:center; gap:14px; padding:0; } .status { margin:0; } .version { font-size:21px; } .release h2 { font-size:21px; } .closing { flex-direction:column; align-items:stretch; padding:22px; } footer { flex-direction:column; gap:13px; } .footer-links { justify-content:flex-start; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main" data-en="Skip to content">跳到正文</a>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="index.html" aria-label="Replyo"><img src="icons/128.png" alt="" width="40" height="40"><span>Replyo</span></a>
+      <nav class="nav" aria-label="导航" data-en-aria="Navigation">
+        <a href="index.html" data-en="Home">首页</a>
+        <a href="features.html" data-en="Features">功能介绍</a>
+        <a href="updates.html" aria-current="page" data-en="Updates">更新记录</a>
+        <button class="language-switch" id="language-switch" type="button" lang="en" aria-label="Switch to English" hidden>English</button>
+        <a class="nav-install" href="https://chromewebstore.google.com/detail/gpedoibklaibdbjchonpnblacnphocmi" target="_blank" rel="noopener noreferrer" data-en="Install ↗">安装商店版 ↗</a>
+      </nav>
+    </header>
+    <main id="main">
+      <section class="page-intro">
+        <p class="eyebrow" data-en="REPLYO / UPDATES">REPLYO / 更新记录</p>
+        <h1 data-en="See what’s new.">每一步更新，都在这里。</h1>
+        <p data-en="Follow the improvements to Replyo, and see which features you can use today and which are coming next.">看看 Replyo 最近增加了什么，哪些现在能用，哪些还在准备中。</p>
+      </section>
+      <aside class="availability" aria-label="版本状态" data-en-aria="Version availability">
+        <p><strong data-en="Store version checked on October 29, 2026: 0.1.4.">2026 年 10 月 29 日核验：商店公开版为 0.1.4。</strong></p>
+        <p data-en="Version 0.3.5 has been submitted for review. Newer features are being tested locally and are not included in the public download. Check the store listing for the latest available version.">0.3.5 已提交审核。后续功能正在本地测试，尚未包含在公开下载中；最新可下载版本请以商店页面为准。</p>
+      </aside>
+      <div class="releases">
+        <article class="release" id="v0-3-8">
+          <div class="release-meta"><span class="version">0.3.8</span><span class="status" data-en="Local testing">本地测试</span></div>
+          <div><h2 data-en="A place to discover everything Replyo can do.">给全部功能，一个方便找到的入口。</h2>
+            <p data-en="The new About Replyo page links to the website’s complete feature guide and update history. Revisit the overview whenever you want to explore more.">新增「关于 Replyo」页面，连接官网完整功能介绍与更新记录。想了解更多时，可以随时回来慢慢看。</p>
+            <ul><li data-en="Find About Replyo in the extension popup and interaction workspace.">从插件弹窗和互动工作台找到「关于 Replyo」。</li><li data-en="Browse all six feature areas with interface examples, availability labels and Chinese or English text.">通过六个场景了解功能，查看界面示意与可用状态，支持中英文切换。</li></ul>
+            <p class="note" data-en="The website guide is available to read; the extension update is still in local testing.">官网介绍页已可阅读；插件更新仍在本地测试中。</p>
+            <a class="release-link" href="features.html" data-en="Explore all features →">查看全部功能 →</a>
+          </div>
+        </article>
+        <article class="release" id="v0-3-7">
+          <div class="release-meta"><span class="version">0.3.7</span><span class="status" data-en="Local testing">本地测试</span></div>
+          <div><h2 data-en="See who follows you back.">看清彼此的关注关系。</h2>
+            <p data-en="Open your own X Following list and start a manual check. Replyo adds relationship labels beside account names.">在自己的 X 关注列表中开始检查，Replyo 会在昵称旁标出关注关系。</p>
+            <ul><li data-en="Distinguish mutual follows, confirmed accounts not following you, and unconfirmed relationships.">区分互相关注、明确未回关和待确认。</li><li data-en="Filter confirmed accounts not following you. Scroll the X list yourself to check more loaded accounts.">筛选明确未回关的账号；继续手动浏览，可检查更多已加载的账号。</li><li data-en="Pause or start over. Results are a snapshot of this visit and clear when you leave or refresh the page.">支持暂停和重新检查；结果为本次浏览快照，离开或刷新页面后清空。</li></ul>
+            <a class="release-link" href="features.html#following-check" data-en="Explore following checks →">了解关注关系检查 →</a>
+          </div>
+        </article>
+        <article class="release" id="v0-3-6">
+          <div class="release-meta"><span class="version">0.3.6</span><span class="status" data-en="Local testing">本地测试</span></div>
+          <div><h2 data-en="Different ways to reply, without choosing a type first.">几种说法，不用先选类型。</h2>
+            <p data-en="Generate up to four labeled candidates with different lengths and angles, chosen to fit the post and your thoughts.">结合帖子和你的想法，生成最多四条不同角度、不同长短的候选，并标明回复方式。</p>
+            <ul><li data-en="Possible approaches include a brief reply, a useful addition, a thoughtful question or a lighthearted response.">可以是简短回应、补充信息、好奇一问，也可以是轻松调侃。</li><li data-en="Choose and edit the suggestion you like, then insert it into X’s reply area and publish yourself.">挑选、修改喜欢的候选，再填入 X 回复区，由你亲自发布。</li></ul>
+            <a class="release-link" href="features.html#reply-assistant" data-en="Explore reply assistance →">了解回复助手 →</a>
+          </div>
+        </article>
+        <article class="release" id="v0-3-5">
+          <div class="release-meta"><span class="version">0.3.5</span><span class="status" data-en="Submitted for review">已提交审核</span></div>
+          <div><h2 data-en="Reply assistance, with room to keep the conversation going.">回复有帮手，对话有地方继续。</h2>
+            <ul><li data-en="An assistant beside X’s reply editor, for responding to other people’s posts and comments under your own.">在 X 回复框旁使用回复助手，参与别人的讨论，也回应自己收到的评论。</li><li data-en="Optional DeepSeek suggestions using your own API key. API usage is billed to your DeepSeek account.">可选接入自己的 DeepSeek API Key 生成建议，用量由你的 DeepSeek 账户承担。</li><li data-en="A local workspace for selected conversations, drafts and to-dos, plus a manual follower log.">本地工作台保存选中的对话、草稿和待办，并支持手动记录粉丝变化。</li><li data-en="A compact interface, Chinese and English choices, and friendly replies that fit the conversation.">更紧凑的界面、中英文切换，以及更友好、贴合语境的回复表达。</li></ul>
+            <p class="note" data-en="Submitted on October 29, 2026. A submission is not a release; installation availability is shown on the Chrome Web Store.">于 2026 年 10 月 29 日提交。提交不代表已上线，可安装状态以 Chrome Web Store 为准。</p>
+            <a class="release-link" href="features.html#workspace" data-en="Explore the workspace →">了解互动工作台 →</a>
+          </div>
+        </article>
+        <article class="release" id="v0-1-4">
+          <div class="release-meta"><span class="version">0.1.4</span><span class="status released" data-en="Available now">已上线</span></div>
+          <div><h2 data-en="Context beside replies. Follower counts beside names.">回复旁看原文，昵称后看粉丝数。</h2>
+            <ul><li data-en="Preview the directly replied-to post in supported X notifications, so you can understand each reply.">在支持的 X 通知中预览被回复的原文，弄清每条评论在接哪句话。</li><li data-en="See available public follower counts on Home, post details and supported notifications.">在首页、帖子详情和支持的通知中显示可获取的公开粉丝数。</li><li data-en="Load missing context on demand, or opt into automatic loading for visible notifications.">缺失原文可按需加载，也可以选择为可见通知开启自动加载。</li></ul>
+            <p class="note" data-en="The store lists an October 22, 2026 update date. Checked on October 29, 2026.">商店显示更新日期为 2026 年 10 月 22 日；核验于 2026 年 10 月 29 日。</p>
+            <a class="release-link" href="features.html#reply-context" data-en="Explore original-post previews →">了解原文预览 →</a>
+          </div>
+        </article>
+      </div>
+      <section class="closing">
+        <div><h2 data-en="Want the whole picture?">想完整了解 Replyo？</h2><p data-en="Explore each feature through everyday scenarios and interface examples.">按使用场景浏览全部功能，看看界面和简单使用方式。</p></div>
+        <a class="cta" href="features.html" data-en="Explore all features →">查看全部功能 →</a>
+      </section>
+    </main>
+    <footer>
+      <p data-en="Replyo is an independent project, not affiliated with or endorsed by X Corp.">Replyo 是独立项目，与 X Corp. 无隶属关系，亦未获得其背书。</p>
+      <div class="footer-links"><a href="index.html" data-en="Home">首页</a><a href="features.html" data-en="Features">功能介绍</a><a href="privacy.html" data-en="Privacy policy">隐私政策</a><a href="mailto:alanhu1024@gmail.com" data-en="Support">联系支持</a></div>
+    </footer>
+  </div>
+  <script>
+    (() => {
+      const button = document.getElementById('language-switch');
+      const texts = [...document.querySelectorAll('[data-en]')].map(node => ({ node, zh: node.textContent, en: node.dataset.en }));
+      const attributes = [['data-en-content', 'content'], ['data-en-aria', 'aria-label']].flatMap(([source, target]) =>
+        [...document.querySelectorAll('[' + source + ']')].map(node => ({ node, target, zh: node.getAttribute(target), en: node.getAttribute(source) }))
+      );
+      const preferenceKey = 'replyo-site-language';
+      let language = 'zh-CN';
+      try { if (localStorage.getItem(preferenceKey) === 'en') language = 'en'; } catch {}
+      const requestedLanguage = new URLSearchParams(location.search).get('lang');
+      if (requestedLanguage === 'en' || requestedLanguage === 'zh' || requestedLanguage === 'zh-CN') {
+        language = requestedLanguage === 'en' ? 'en' : 'zh-CN';
+        try { localStorage.setItem(preferenceKey, language); } catch {}
+      }
+      function render() {
+        const english = language === 'en';
+        document.documentElement.lang = language;
+        for (const item of texts) item.node.textContent = english ? item.en : item.zh;
+        for (const item of attributes) item.node.setAttribute(item.target, english ? item.en : item.zh);
+        button.textContent = english ? '中文' : 'English';
+        button.lang = english ? 'zh-CN' : 'en';
+        button.setAttribute('aria-label', english ? '切换为中文' : 'Switch to English');
+      }
+      button.hidden = false;
+      button.addEventListener('click', () => {
+        language = language === 'en' ? 'zh-CN' : 'en';
+        render();
+        try { localStorage.setItem(preferenceKey, language); } catch {}
+        const url = new URL(location.href);
+        url.searchParams.set('lang', language);
+        history.replaceState(null, '', url);
+      });
+      render();
+    })();
+  </script>
+</body>
+</html>
