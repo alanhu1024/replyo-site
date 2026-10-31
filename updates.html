@@ -81,14 +81,20 @@
         <p data-en="Follow the improvements to Replyo, and see which features you can use today and which are coming next.">看看 Replyo 最近增加了什么，哪些现在能用，哪些还在准备中。</p>
       </section>
       <aside class="availability" aria-label="版本状态" data-en-aria="Version availability">
-        <p><strong data-en="Store version checked on October 30, 2026: 0.1.4.">2026 年 10 月 30 日核验：商店公开版为 0.1.4。</strong></p>
-        <p data-en="Version 0.3.10 was withdrawn and replaced by the combined 0.3.14 submission, now awaiting review with automatic publication enabled after approval. Its new features and logo are not yet in the public download. Check the store listing for the latest available version.">0.3.10 已撤回，并整合为 0.3.14 重新提交，目前等待审核，已设置审核通过后自动发布。新版功能及图标尚未包含在公开下载中；最新可下载版本请以商店页面为准。</p>
+<p data-en="Store version checked on October 30, 2026: 0.3.14.">2026 年 10 月 30 日核验：商店公开版为 0.3.14。</p>
+<p data-en="Version 0.3.14 is now available. Version 0.3.15 has been submitted for review, with automatic publication after approval. Its additional AI providers are not yet in the public download.">0.3.14 现已公开上线。0.3.15 已提交审核，并设置为通过后自动发布；新增 AI 服务商尚未包含在公开下载中。</p>
       </aside>
       <div class="releases">
+        <article class="release" id="v0-3-15">
+          <div class="release-meta"><span class="version">0.3.15</span><span class="status" data-en="Submitted for review">已提交审核</span></div>
+          <div><h2 data-en="Choose the AI provider you already use.">用你已有的 AI 服务准备回复。</h2>
+<p data-en="Adds OpenAI, OpenRouter and SiliconFlow (China) alongside DeepSeek. Select a provider, enter its chat model ID and API key, then consent and save. One configuration is active at a time; replacing it clears the previous key.">在 DeepSeek 之外新增 OpenAI、OpenRouter 和硅基流动（中国区）。选择服务商、填写聊天模型名称和 Key，同意数据使用后保存；同时启用一份配置，新配置会替换旧 Key。</p><p data-en="Connection testing sends no posts and does not generate replies. OpenRouter may route generation contents to the upstream model provider. Each provider uses an optional host permission.">测试连接不发送帖子或生成回复。OpenRouter 可能将生成内容转交给所选模型的上游服务商。各平台分别申请可选域名权限。</p><p class="note" data-en="Submitted for review, with automatic publication after approval. Public version remains 0.3.14. New providers are not yet in the public download.">已提交审核，设置为通过后自动发布。当前公开版仍为 0.3.14，新增服务商尚未包含在公开下载中。</p></div>
+        </article>
+
         <article class="release" id="v0-3-14">
-          <div class="release-meta"><span class="version">0.3.14</span><span class="status" data-en="Submitted for review">已提交审核</span></div>
+          <div class="release-meta"><span class="version">0.3.14</span><span class="status released" data-en="Available now">已上线</span></div>
           <div><h2 data-en="See whom you haven’t followed back, and get to the right button.">看清谁还没回关，顺手找到关注按钮。</h2>
-            <p data-en="This update retains the 0.3.10 features and improves the following-check workflow. The older submission was withdrawn and 0.3.14 was submitted on October 30, 2026. It is awaiting Chrome Web Store review and is not yet in the public download.">这次更新保留 0.3.10 的功能，并完善关注关系检查流程。旧提交已撤回，0.3.14 于 2026 年 10 月 30 日重新提交，正在等待 Chrome Web Store 审核，尚未包含在公开下载中。</p>
+<p data-en="This update retains the 0.3.10 features and improves following checks. It was submitted on October 30, 2026 and is now confirmed publicly available in the Chrome Web Store.">这次更新保留 0.3.10 功能，并完善关注关系检查流程。于 2026 年 10 月 30 日提交，现已确认审核通过并在 Chrome 商店公开上线。</p>
             <ul>
               <li data-en="Check loaded accounts across your own Following, Followers and Verified Followers tabs. Find people who do not follow you back or whom you have not followed back; missing evidence stays unconfirmed.">支持自己的正在关注、关注者和认证关注者三个标签，检查已加载账号，筛选对方未回关或自己未回关的账号；信息不足时保留待确认。</li>
               <li data-en="Go to follow back locates and highlights the matching native X follow control, or opens that account’s profile if its row is no longer loaded. You decide whether to follow and click X’s own button yourself.">「去回关」会定位并突出显示对应的 X 原生关注按钮；该账号已不在页面中时，打开其个人主页。是否关注由你决定，并由你点击 X 的按钮完成。</li>
@@ -96,7 +102,7 @@
               <li data-en="After matching page data confirms that you followed back, a completion animation removes the account from the not-followed-back results. Clicking Go alone never counts as a successful follow.">重新读取到对应页面数据、确认回关状态变化后，该条目会带着完成动画退出「我未回关」结果；仅点击「去回关」不会被判定为成功。</li>
               <li data-en="Includes the earlier DeepSeek reply assistant with varied candidates, local workspace, manual follower log, account cards, About Replyo and the conversation-inspired logo, with updated Chinese and English privacy disclosures.">同时包含此前的 DeepSeek 多样回复候选、本地工作台、手动粉丝记录、账号卡片、「关于 Replyo」入口和对话主题新图标，并同步中英文隐私说明。</li>
             </ul>
-            <p class="note" data-en="Automatic publication is enabled after approval. Store version 0.1.4 remains available in the meantime. Checks cover only loaded accounts; Verified Followers covers only that tab. They never follow or unfollow automatically. Account-level mutual-follower percentage analysis remains unavailable without a connected X API provider.">已设置审核通过后自动发布，期间商店公开版仍为 0.1.4。检查仅覆盖已加载账号，认证关注者仅覆盖该标签，不会自动关注或取关。账号互关粉丝占比分析尚未接入 X API，仍不可用。</p>
+<p class="note" data-en="Publicly available as 0.3.14. Checks cover loaded accounts only; Verified Followers covers only that tab. Following remains manual. Full mutual-percentage analysis has no connected X API provider and is unavailable.">0.3.14 已公开上线。检查仅覆盖已加载账号，认证关注者仅覆盖该标签，关注仍由你手动完成。完整互关占比分析尚未接入 X API，仍不可用。</p>
             <a class="release-link" href="features.html#following-check" data-en="Explore following checks →">了解关注关系检查 →</a>
           </div>
         </article>
@@ -111,7 +117,7 @@
               <li data-en="Keep selected conversations and drafts in the local workspace, record follower totals manually, and find the complete feature guide through About Replyo.">用本地工作台保存选中的对话与草稿、手动记录粉丝变化，并通过「关于 Replyo」查看完整功能介绍。</li>
               <li data-en="A new conversation-inspired R icon, plus updated Chinese and English descriptions and privacy disclosures.">采用对话主题的新版 R 图标，并更新中英文介绍和隐私说明。</li>
             </ul>
-            <p class="note" data-en="This version was not published. The replacement 0.3.14 submission is awaiting review. Account-level mutual-follower percentage analysis has no connected X API provider and remains unavailable.">此版本未发布，接替它的 0.3.14 正在等待审核。账号互关粉丝占比分析尚未接入 X API，仍不可用。</p>
+            <p class="note" data-en="This version was not published. The replacement 0.3.14 version is now publicly available. Account-level mutual-follower percentage analysis has no connected X API provider and remains unavailable.">此版本未发布，接替它的 0.3.14 现已公开上线。账号互关粉丝占比分析尚未接入 X API，仍不可用。</p>
             <a class="release-link" href="features.html" data-en="Explore the feature guide →">查看完整功能介绍 →</a>
           </div>
         </article>
@@ -120,7 +126,7 @@
           <div><h2 data-en="A place to discover everything Replyo can do.">给全部功能，一个方便找到的入口。</h2>
             <p data-en="The new About Replyo page links to the website’s complete feature guide and update history. Revisit the overview whenever you want to explore more.">新增「关于 Replyo」页面，连接官网完整功能介绍与更新记录。想了解更多时，可以随时回来慢慢看。</p>
             <ul><li data-en="Find About Replyo in the extension popup and interaction workspace.">从插件弹窗和互动工作台找到「关于 Replyo」。</li><li data-en="Browse all six feature areas with interface examples, availability labels and Chinese or English text.">通过六个场景了解功能，查看界面示意与可用状态，支持中英文切换。</li></ul>
-            <p class="note" data-en="The website guide is available to read. The extension entry point was first merged into 0.3.10 and is retained in the replacement 0.3.14 submission, awaiting review.">官网介绍页已可阅读。插件入口先整合至 0.3.10，并保留在接替提交的 0.3.14 中，等待审核。</p>
+            <p class="note" data-en="The website guide is available to read. The extension entry point was first merged into 0.3.10 and is retained in the replacement 0.3.14 version, now available.">官网介绍页已可阅读。插件入口先整合至 0.3.10，并保留在接替提交的 0.3.14 中，现已上线。</p>
             <a class="release-link" href="features.html" data-en="Explore all features →">查看全部功能 →</a>
           </div>
         </article>
@@ -144,7 +150,7 @@
           <div class="release-meta"><span class="version">0.3.5</span><span class="status" data-en="Withdrawn · Merged into 0.3.10">已撤回 · 整合至 0.3.10</span></div>
           <div><h2 data-en="Reply assistance, with room to keep the conversation going.">回复有帮手，对话有地方继续。</h2>
             <ul><li data-en="An assistant beside X’s reply editor, for responding to other people’s posts and comments under your own.">在 X 回复框旁使用回复助手，参与别人的讨论，也回应自己收到的评论。</li><li data-en="Optional DeepSeek suggestions using your own API key. API usage is billed to your DeepSeek account.">可选接入自己的 DeepSeek API Key 生成建议，用量由你的 DeepSeek 账户承担。</li><li data-en="A local workspace for selected conversations, drafts and to-dos, plus a manual follower log.">本地工作台保存选中的对话、草稿和待办，并支持手动记录粉丝变化。</li><li data-en="A compact interface, Chinese and English choices, and friendly replies that fit the conversation.">更紧凑的界面、中英文切换，以及更友好、贴合语境的回复表达。</li></ul>
-            <p class="note" data-en="This submission was withdrawn on October 29, 2026 and merged into 0.3.10. That submission was later withdrawn on October 30; its features are retained in 0.3.14, now awaiting review.">此轮提交于 2026 年 10 月 29 日撤回并整合至 0.3.10；后者又于 10 月 30 日撤回，相关功能保留在当前待审的 0.3.14 中。</p>
+            <p class="note" data-en="This submission was withdrawn on October 29, 2026 and merged into 0.3.10. That submission was later withdrawn on October 30; its features are retained in 0.3.14, now publicly available.">此轮提交于 2026 年 10 月 29 日撤回并整合至 0.3.10；后者又于 10 月 30 日撤回，相关功能保留在现已上线的 0.3.14 中。</p>
             <a class="release-link" href="features.html#workspace" data-en="Explore the workspace →">了解互动工作台 →</a>
           </div>
         </article>
